@@ -98,12 +98,26 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Step 1: Loop through the list, moving the robot right and comparing items
-        # for i in range(0, len(self._list) - 1):
+        # Step 1: Move through list to the right, swapping items next to each other if item on right is less
+        while self.can_move_right() == True:
+            self.move_right()
+            if self.compare_item() == -1:
+                self.swap_item()
+                self.move_right()
+            elif self.compare_item() == -1 or self.compare_item() == 0:
+                self.move_right()
+
+        # Step 2: Move through list to the left, swapping items next to each other if item on left is less
+        while self.can_move_left() == True:
+            self.move_left()
+            if self.compare_item() == 1:
+                self.swap_item()
+                self.move_left()
+            elif self.compare_item() == -1 or self.compare_item() == 0:
+                self.move_left()
+
 
         # Step 2: If item is less than robot's current item
-
-
 if __name__ == "__main__":
     # Test our your implementation from the command line
     # with `python robot_sort.py`
