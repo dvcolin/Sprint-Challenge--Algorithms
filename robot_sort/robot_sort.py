@@ -98,26 +98,39 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
+
+        # Swap robot's current item (None) for first item in list
+        self.swap_item()
         # Step 1: Move through list to the right, swapping items next to each other if item on right is less
+        print('STARTING RIGHT SORT')
         while self.can_move_right() == True:
-            self.move_right()
-            if self.compare_item() == -1:
+            if self.compare_item() == None:
+                self.move_right()
+            elif self.compare_item() == -1:
+                self.swap_item()
+                print(self._item)
+                self.move_right()
+                self.swap_item()
+            else:
+                self.move_right()
                 self.swap_item()
                 self.move_right()
-            elif self.compare_item() == -1 or self.compare_item() == 0:
-                self.move_right()
-
         # Step 2: Move through list to the left, swapping items next to each other if item on left is less
+        print('STARTING LEFT SORT')
         while self.can_move_left() == True:
-            self.move_left()
-            if self.compare_item() == 1:
+            if self.compare_item() == None:
+                self.move_left()
+            elif self.compare_item() == 1:
+                self.swap_item()
+                print(self._item)
+                self.move_left()
+            else:
+                self.move_left()
                 self.swap_item()
                 self.move_left()
-            elif self.compare_item() == -1 or self.compare_item() == 0:
-                self.move_left()
+        self.swap_item()
 
 
-        # Step 2: If item is less than robot's current item
 if __name__ == "__main__":
     # Test our your implementation from the command line
     # with `python robot_sort.py`
