@@ -6,21 +6,21 @@ Your function must utilize recursion. It cannot contain any loops.
 
 
 def count_th(word):
-    matches = []
+    count = 0
 
     def count_th_inner(word):
-        nonlocal matches
+        nonlocal count
         # Check if 'th' is in word
         if 'th' in word:
-            # If 'th' in word, append word to matches list
-            matches.append(word)
             # Find index of substring and slice word
             th_index = word.find('th')
             word = word[th_index + 2:]
+            count += 1
 
+            # Pass new word into function
             return count_th_inner(word)
-            # Else return the length of matches
+            # Else return the count
         else:
-            return len(matches)
+            return count
 
     return count_th_inner(word)
